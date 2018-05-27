@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiangdaxian.jdxtest.dao.JdxTestDao">
+	<resultMap id="jdxTestResult" type="com.jiangdaxian.jdxtest.entity.JdxTestEntity">
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="selectById" resultMap="jdxTestResult" parameterType="map">
+		select id,name from jdx_test where
+		id=#{id,jdbcType=BIGINT};
+	</select>
+
+	<insert id="insert" parameterType="com.jiangdaxian.jdxtest.entity.JdxTestEntity"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into jdx_test (name) values (#{name,jdbcType=VARCHAR});
+	</insert>
+	
+	<insert id="insertAboutId" parameterType="com.jiangdaxian.jdxtest.entity.JdxTestEntity"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into jdx_test (id,name) values (#{id,jdbcType=BIGINT},#{name,jdbcType=VARCHAR});
+	</insert>
+</mapper>
+
