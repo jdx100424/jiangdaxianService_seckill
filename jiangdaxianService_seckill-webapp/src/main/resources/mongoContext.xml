@@ -19,10 +19,10 @@
 	<!--credentials的配置形式是：用户名:密码@默认数据库-->
     <mongo:mongo-client id="mongoClient" host="${mongo.ip}" port="${mongo.port}">        
         <mongo:client-options  write-concern="SAFE"
-            connections-per-host="10" 
+            connections-per-host="20" 
             threads-allowed-to-block-for-connection-multiplier="5" 
             connect-timeout="2000" 
-            max-wait-time="2000" 
+            max-wait-time="2000"
             socket-timeout="2000"/>        
     </mongo:mongo-client>
     

@@ -2,6 +2,7 @@ package com.jiangdaxian.test.service.seckill;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -29,30 +30,33 @@ public class SeckillServiceTest extends BaseTestCase {
 	@Test
 	public void testInsertSeckillActivityMongo() throws Exception {
 		SeckillActivityMongo seckillActivityMongo = new SeckillActivityMongo();
-		seckillActivityMongo.setSeckillActivityName("jdx测试秒杀活动");
+		seckillActivityMongo.setSeckillActivityName("jdx20180528测试秒杀活动(2)");
 		Date date = new Date();
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.DAY_OF_MONTH, 1);
+		
 		seckillActivityMongo.setStartTime(date);
-		seckillActivityMongo.setEndTime(date);
+		seckillActivityMongo.setEndTime(c.getTime());
 		seckillActivityMongo.setCreateTime(date);
 		seckillActivityMongo.setUpdateTime(date);
 		seckillActivityMongo.setStatus(1);
 		
 		List<SeckillGoodsSkuInfoMongo> seckillGoodsSkuInfoMongoList = new ArrayList<SeckillGoodsSkuInfoMongo>();
 		SeckillGoodsSkuInfoMongo seckillGoodsSkuInfoMongoOne = new SeckillGoodsSkuInfoMongo();
-		seckillGoodsSkuInfoMongoOne.setGoodsSkuId(1L);
+		seckillGoodsSkuInfoMongoOne.setGoodsSkuId(10000L);
 		SeckillGoodsSkuInfoNumMongo seckillGoodsSkuInfoNumMongo = new SeckillGoodsSkuInfoNumMongo();
 		seckillGoodsSkuInfoNumMongo.setGoodsSkuName("秒杀商品1");
-		seckillGoodsSkuInfoNumMongo.setQualificationNum(3);
-		seckillGoodsSkuInfoNumMongo.setStockNum(3);
+		seckillGoodsSkuInfoNumMongo.setQualificationNum(30);
+		seckillGoodsSkuInfoNumMongo.setStockNum(30);
 		seckillGoodsSkuInfoNumMongo.setPrice(new BigDecimal(50));
 		seckillGoodsSkuInfoMongoOne.setSeckillGoodsSkuInfoNumMongo(seckillGoodsSkuInfoNumMongo);
 		
 		SeckillGoodsSkuInfoMongo seckillGoodsSkuInfoMongoTwo = new SeckillGoodsSkuInfoMongo();
-		seckillGoodsSkuInfoMongoTwo.setGoodsSkuId(2L);
+		seckillGoodsSkuInfoMongoTwo.setGoodsSkuId(20000L);
 		SeckillGoodsSkuInfoNumMongo seckillGoodsSkuInfoNumMongoTwo = new SeckillGoodsSkuInfoNumMongo();
 		seckillGoodsSkuInfoNumMongoTwo.setGoodsSkuName("秒杀商品2");
-		seckillGoodsSkuInfoNumMongoTwo.setQualificationNum(5);
-		seckillGoodsSkuInfoNumMongoTwo.setStockNum(5);
+		seckillGoodsSkuInfoNumMongoTwo.setQualificationNum(50);
+		seckillGoodsSkuInfoNumMongoTwo.setStockNum(50);
 		seckillGoodsSkuInfoNumMongoTwo.setPrice(new BigDecimal(80));
 		seckillGoodsSkuInfoMongoTwo.setSeckillGoodsSkuInfoNumMongo(seckillGoodsSkuInfoNumMongoTwo);
 
