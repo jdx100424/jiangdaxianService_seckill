@@ -16,6 +16,7 @@
 
 	<!-- 提供方应用名称信息，这个相当于起一个名字，我们dubbo管理页面比较清晰是哪个应用暴露出来的 -->
 	<dubbo:application name="dubbo_jiangdaxianService_seckill-webapp"></dubbo:application>
+	<dubbo:protocol name="dubbo" port="30000" />  
 	<!-- 使用zookeeper注册中心暴露服务地址 -->
 	<dubbo:registry address="zookeeper://${zookeeper.url}"
 		check="false"></dubbo:registry>
@@ -25,6 +26,8 @@
 	<!-- 暴露你的服务地址 -->
 	<dubbo:service ref="seckillDubbo" interface="com.jiangdaxian.seckill.api.SeckillApi"
 		protocol="dubbo" version="1.0.0" />
+		
+	<import resource="classpath*:/*-api.xml" />
 </beans>
 
 

@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jiangdaxian.autoid.util.AutoIdUtil;
 import com.jiangdaxian.redis.RedisLock;
 import com.jiangdaxian.seckill.api.SeckillApi;
 import com.jiangdaxian.seckill.constant.SeckillConstant;
@@ -20,6 +21,8 @@ public class SeckillDubbo implements SeckillApi {
 	private RedisLock redisLock;
 	@Autowired
 	private SeckillService seckillService;
+	@Autowired
+	private AutoIdUtil autoIdUtil;
 	
 	//String seckillActivityMongoId,Long goodsSkuId,Long userId
 	private static final String USER_REDIS_LOCK = "USER_SECKILL_QUALIFICATION_REDIS_LOCK:%s:%s:%s";
@@ -76,6 +79,10 @@ public class SeckillDubbo implements SeckillApi {
 			
 			//资格表增加此用户
 			seckillService.addUserGoodsSkuIdQualification(seckillActivityMongoId, goodsSkuId,userId);
+		
+			//抢到后获取一个随机ID
+			Long getId = autoIdUtil.getNextId("jdxProjectName", "jdxTableName");
+			LOG.info("get Qualification success, get id is :{},param:{},{},{}",getId,seckillActivityMongoId, goodsSkuId, userId);
 		}catch(Exception e) {
 			LOG.error(e.getMessage(),e);
 			throw e;

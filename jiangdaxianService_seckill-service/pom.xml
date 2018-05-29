@@ -13,6 +13,11 @@
 	<packaging>jar</packaging>
 	<dependencies>	
 		<dependency>
+			<groupId>jiangdaxian_component_autoId</groupId>
+			<artifactId>jiangdaxian_component_autoId</artifactId>
+			<version>1.0.0-SNAPSHOT</version>	
+		</dependency>
+		<dependency>
 			<groupId>jiangdaxian_component_redis</groupId>
 			<artifactId>jiangdaxian_component_redis</artifactId>
 			<version>1.0.0-SNAPSHOT</version>

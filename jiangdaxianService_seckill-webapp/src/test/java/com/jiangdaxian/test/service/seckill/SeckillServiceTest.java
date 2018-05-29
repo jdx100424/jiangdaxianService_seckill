@@ -30,7 +30,7 @@ public class SeckillServiceTest extends BaseTestCase {
 	@Test
 	public void testInsertSeckillActivityMongo() throws Exception {
 		SeckillActivityMongo seckillActivityMongo = new SeckillActivityMongo();
-		seckillActivityMongo.setSeckillActivityName("jdx20180528测试秒杀活动(10)");
+		seckillActivityMongo.setSeckillActivityName("jdx20180528测试秒杀活动(13)");
 		Date date = new Date();
 		Calendar c = Calendar.getInstance();
 		c.add(Calendar.DAY_OF_MONTH, 1);
@@ -46,8 +46,8 @@ public class SeckillServiceTest extends BaseTestCase {
 		seckillGoodsSkuInfoMongoOne.setGoodsSkuId(10000L);
 		SeckillGoodsSkuInfoNumMongo seckillGoodsSkuInfoNumMongo = new SeckillGoodsSkuInfoNumMongo();
 		seckillGoodsSkuInfoNumMongo.setGoodsSkuName("秒杀商品1");
-		seckillGoodsSkuInfoNumMongo.setQualificationNum(30);
-		seckillGoodsSkuInfoNumMongo.setStockNum(30);
+		seckillGoodsSkuInfoNumMongo.setQualificationNum(150);
+		seckillGoodsSkuInfoNumMongo.setStockNum(150);
 		seckillGoodsSkuInfoNumMongo.setPrice(new BigDecimal(50));
 		seckillGoodsSkuInfoMongoOne.setSeckillGoodsSkuInfoNumMongo(seckillGoodsSkuInfoNumMongo);
 		
@@ -55,8 +55,8 @@ public class SeckillServiceTest extends BaseTestCase {
 		seckillGoodsSkuInfoMongoTwo.setGoodsSkuId(20000L);
 		SeckillGoodsSkuInfoNumMongo seckillGoodsSkuInfoNumMongoTwo = new SeckillGoodsSkuInfoNumMongo();
 		seckillGoodsSkuInfoNumMongoTwo.setGoodsSkuName("秒杀商品2");
-		seckillGoodsSkuInfoNumMongoTwo.setQualificationNum(50);
-		seckillGoodsSkuInfoNumMongoTwo.setStockNum(50);
+		seckillGoodsSkuInfoNumMongoTwo.setQualificationNum(210);
+		seckillGoodsSkuInfoNumMongoTwo.setStockNum(210);
 		seckillGoodsSkuInfoNumMongoTwo.setPrice(new BigDecimal(80));
 		seckillGoodsSkuInfoMongoTwo.setSeckillGoodsSkuInfoNumMongo(seckillGoodsSkuInfoNumMongoTwo);
 

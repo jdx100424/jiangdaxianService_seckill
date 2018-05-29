@@ -22,13 +22,13 @@ public class SeckillDubboTest extends BaseTestCase {
 	private MongoTemplate mongoTemplate;
 	@Test
 	public void testAddQualification() throws Exception {
-		final String seckillActivityMongoId = "5b0ce60477d5281c840eb0a9";
+		final String seckillActivityMongoId = "5b0cf8c877d52809186b5cae";
 		final Long goodsSkuId = 20000L;
-		for(int i=0;i<150;i++) {
+		for(int i=0;i<120;i++) {
 			new Thread(new Runnable() {
 				public void run() {
 					try {
-						seckillDubbo.addQualification(seckillActivityMongoId, goodsSkuId, Long.parseLong(Integer.toString(new Random().nextInt(150))));
+						seckillDubbo.addQualification(seckillActivityMongoId, goodsSkuId, Long.parseLong(Integer.toString(new Random().nextInt(1500000))));
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -36,7 +36,7 @@ public class SeckillDubboTest extends BaseTestCase {
 				}
 			}).start();
 		}
-		Thread.sleep(1000*60);
+		Thread.sleep(10000*60);
 		
 		DBObject dbObject = new BasicDBObject();
 		dbObject.put("seckillActivityMongoId", seckillActivityMongoId);
@@ -50,5 +50,12 @@ public class SeckillDubboTest extends BaseTestCase {
 		}
 	}
 	
-	
+	@Test
+	public void testAddQualificationTwo() throws Exception {
+		final String seckillActivityMongoId = "5b0ce60477d5281c840eb0a9";
+		final Long goodsSkuId = 20000L;
+		for(int i=0;i<2;i++) {
+			seckillDubbo.addQualification(seckillActivityMongoId, goodsSkuId, Long.parseLong(Integer.toString(new Random().nextInt(15000))));
+		}
+	}
 }
