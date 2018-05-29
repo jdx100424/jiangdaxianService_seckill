@@ -22,7 +22,7 @@ public class SeckillDubboTest extends BaseTestCase {
 	private MongoTemplate mongoTemplate;
 	@Test
 	public void testAddQualification() throws Exception {
-		final String seckillActivityMongoId = "5b0b710a77d5282c4cd5f0fe";
+		final String seckillActivityMongoId = "5b0ce60477d5281c840eb0a9";
 		final Long goodsSkuId = 20000L;
 		for(int i=0;i<150;i++) {
 			new Thread(new Runnable() {

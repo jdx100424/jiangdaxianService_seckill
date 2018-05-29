@@ -30,7 +30,7 @@ public class SeckillServiceTest extends BaseTestCase {
 	@Test
 	public void testInsertSeckillActivityMongo() throws Exception {
 		SeckillActivityMongo seckillActivityMongo = new SeckillActivityMongo();
-		seckillActivityMongo.setSeckillActivityName("jdx20180528测试秒杀活动(2)");
+		seckillActivityMongo.setSeckillActivityName("jdx20180528测试秒杀活动(10)");
 		Date date = new Date();
 		Calendar c = Calendar.getInstance();
 		c.add(Calendar.DAY_OF_MONTH, 1);
