@@ -5,6 +5,8 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.jiangdaxian.autoid.util.AutoIdUtil;
@@ -24,6 +26,11 @@ public class SeckillDubbo implements SeckillApi {
 	@Autowired
 	private AutoIdUtil autoIdUtil;
 	
+	@SuppressWarnings("rawtypes")
+	@Autowired
+	@Qualifier("redisIncrTemplate")
+	private RedisTemplate redisIncrTemplate;
+	
 	//String seckillActivityMongoId,Long goodsSkuId,Long userId
 	private static final String USER_REDIS_LOCK = "USER_SECKILL_QUALIFICATION_REDIS_LOCK:%s:%s:%s";
 	private static final Logger LOG = LoggerFactory.getLogger(SeckillService.class);
@@ -34,7 +41,11 @@ public class SeckillDubbo implements SeckillApi {
 		LOG.info("SeckillDubbo::addQualification::param,{}",msg);
 		String lock = String.format(USER_REDIS_LOCK,seckillActivityMongoId,goodsSkuId,userId);
 		try {
-			redisLock.lockByIncr(lock);
+			long isLockLong = redisIncrTemplate.opsForValue().increment(lock, 1);
+			if(isLockLong!=1) {
+				LOG.warn("重复操作");
+				return;
+			}
 			Date nowDate = new Date();
 			SeckillActivityMongo seckillActivityMongo = seckillService.getSeckillActivityMongoById(seckillActivityMongoId);
 			if(seckillActivityMongo==null) {
@@ -87,7 +98,8 @@ public class SeckillDubbo implements SeckillApi {
 			LOG.error(e.getMessage(),e);
 			throw e;
 		}finally {
-			redisLock.unlock(lock);
+			//redisLock.unlock(lock);
+			redisIncrTemplate.delete(lock);
 		}
 	}
 	/*
